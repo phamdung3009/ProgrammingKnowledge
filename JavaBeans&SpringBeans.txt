@@ -1,0 +1,62 @@
+Java-Bean là gì?
+	Đây là 1 phần mềm được thiết kế để có thể tái sử dụng trong nhiều môi trường khác nhau.
+	JavaBeans là các class đóng gói nhiều đối tượng thành 1 đối tượng duy nhất, giúp truy cập các đối tượng này từ nhiều nơi,
+		chứa các thành phần chính như Constructor, method getter and setter....
+	JavaBean là 1 class phải tuân thủ theo các quy ước sau:
+		Class Definition(Định nghĩa lớp): 
+			Chúng được định nghĩa là các class công khai.
+		Serializability (Optional) - Khả năng tuần tự hóa (Tùy chọn):
+			Mặc dù không bắt buộc, nhưng họ thường triển khai giao diện Serializable để cho phép dữ liệu đối tượng được chuyển 
+			đổi thành luồng byte để lưu trữ hoặc truyền tải.
+		No-argument Constructor - Hàm tạo không có đối số: 
+			JavaBeans phải có một hàm tạo công khai không có đối số (thường được gọi là hàm tạo không có đối số). Nó đơn giản hóa việc tạo đối tượng.
+		Data Encapsulation - Đóng gói dữ liệu: 
+			Đóng gói dữ liệu sở hữu các thuộc tính private để lưu trạng thái của các đối tượng
+		Getter and Setter Methods - Phương thức Getter và Setter
+			đối với private field phải có các phương thức getter và setter
+	Không phụ thuộc vào framwork nào sử dụng trực tiếp trong java, khởi tạo thủ công sử dụng từ khoá new
+		VD code đơn giản về JavaBean:
+			public class Employee implements java.io.Serializable {
+				private int id;
+				private String name;
+				public Employee() {}
+				public void setId(int id) {
+					this.id = id;
+				}
+				public int getId() {
+					return id;
+				}
+				public void setName(String name) {
+					this.name = name;
+				}
+				public String getName() {
+					return name;
+				}
+			}
+		Truy cập vào lớp JavaBean:
+			public class Test {
+				public static void main(String args[]) {
+					Employee e = new Employee(); //object is created  
+					e.setName("Arjun"); //setting value to the object  
+					System.out.println(e.getName());
+				}
+			}
+Spring-Beans là gì?
+	Spring Bean là các đối tượng được Spring IoC Container quản lý.
+	Hoạt động chỉ trong Spring framwork hay còn gọi Spring IoC Container quản lý, 
+		thực thi các logic và quản lý phụ thuộc,
+	IoC Container có nhiệm vụ tạo và khởi tạo các đối tượng(Bean), quản lý vòng đời của Bean, tạo và huỷ Bean
+	Denpendency injection(DI) tiêm các phụ thuộc
+	Được quản lý bằng IoC Container nên không phải khởi tạo thủ công như Java-Bean bằng tử khoá "new" mà ta có
+		thể khởi tạo bằng 3 cách: contructor, setter, field injection
+	sử dụng Spring-Bean giúp quan lý sự phụ thuộc, thay vì các class tự tạo và quản lý phụ thuộc, Spring IoC đảm nhận
+		việc này thông DI, Logic ứng dụng nằm trong các class, dễ tái sử dụng của các đối tượng và sửa đổi mà
+		không cần sửa hay ảnh hương logic ban đầu.
+	Để biết được là 1 Bean thì các đối tượng ta phải định nghĩa nó là Annotation VD: @Commponent, @Service,...
+		VD về Spring-Bean
+			@Component
+			class A {
+				public void functionA() {
+					System.out.println("Hello Dung");
+				}
+			}

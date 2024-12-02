@@ -1,0 +1,35 @@
+Swagger là gì?
+	Swagger là 1 tập hợp công cụ mã nguồn mở, giúp mô tả API bằng cách sử dụng định dạng JSON hoặc YAML,
+		tự động tạo tài liệu API từ mà nguồn, cung cấp giao diện tương tác để thử nghiệm API endpoints
+		ngay trên trình duyệt thông qua SwaggerUI
+	Swagger cung cấp 3 tool chính:
+		SwaggerUI: giao diện trực quan, hiển thị API, cho phép sử dụng ngay trên giao diện
+		SwaggerEditor: dùng để design lên các APIs hoàn toàn mới hoặc edit lại các APIs có sẵn thông qua 1 file config.
+		Swagger-Codegen : dùng để generate ra code từ các file config có sẵn
+			Trong các tool trên, SwaggerUI được sử dụng nhiều nhất, giúp sinh ra giao diện cho tài liệu từ file
+			config dưới chuẩn OpenAPI. Giao diện được hiện rõ ràng và tường minh
+	Cấu trúc cơ bản của file Swagger
+		Metadata: mọi thông số kỹ thuật của Swagger đều bắt dầu với phiên bản Swagger. Phiên bản Swagger xác địnhcấu trúc
+			tổng thế của đặc tả API - những gì bạn có thể ghi lại và cách bạn ghi lại nó. Ngoài ra thông tin hay version của
+			bản API hiện tại cũng được khai bảo ở tại đây.
+		BaseURL: Nơi đinh nghĩa host của server, đường dẫn cơ bản cũng như giao thức https hoặc https
+		Consumes, Produces: xác định các loại MiME được API hỗ trợ
+		Paths: xác định các điểm cuối riêng lẻ(đường dẫn) trong API của bạn và các Phương thức HTTP(hoạt động) được hỗ trợ bởi
+		các điểm cuối này. Và đây là phần quan trọng chứa thông API của bạn sẽ như thế nào bằng đường dẫn API, phương thức
+		(GET,POST,PUT...), request (query, path, body..), response API
+	API Host and Base URL
+		REST APIs có một URL cơ sở mà các đường dẫn điểm cuối được nối vào. Đường url này được định nghĩa bởi schema, host, basePath
+			host: petstore.swagger.io
+			basePath: /v2
+			schemes:
+			  - https
+		Tất cả API đểu được dưa trên URL này VD:
+			<Scheme>://<host>/<basePath>/users.
+				GET https://petstore.swagger.io/v2/pets/findByStatus?status=available
+					GET - operation
+					https - schema
+					petstore.swagger.io - host
+					v2 - basePath
+					pets/findByStatus - path
+					status=available - query parameter
+Link Tài Liệu Swagger cơ bản - https://viblo.asia/p/co-ban-ve-swagger-oOVlYjOV58W

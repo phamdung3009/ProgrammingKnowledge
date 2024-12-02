@@ -1,0 +1,103 @@
+Bean là gì? :
+	Trong spring Bean là 1 đối tượng được quản lý trong Spring framework, được đánh dấu bởi các Annotation như là @Component, @Service, @Reposioty,@configuration...
+	Các Bean này được quản lỳ bằng IoC Container
+IoC Container là gì? :
+	IoC Container dùng để quản lý khởi tạo và huỷ bỏ các Bean, trong Java-Core mình quản lý 1 Object bằng từ khoá "new", nhưng trong Spring framework
+	mình quản lý 1 Object hay còn gọi là 1 Bean bằng IoC Container, đây gọi là đảo ngược sự điểu khiển không theo như ngày xưa quản lý theo cách chuẩn
+	chỉ bằng từ khoá "new"
+DI(dependency injection - tiêm(đẩy) sự phụ thuộc ) là gì? :
+	Bây giờ khi mình có 1 IoC Container(thùng chứa tất cả các Bean) làm sao để dependency injection(tiêm sự phụ thuộc) vào trong code(class) trong khi
+	1 IoC Container	có rất nhiều hỗn hợp các Bean? Khi nào trong code muốn dùng lấy 1 cái Bean đấy mình sẽ lấy nó ra injection nó vào class đấy 
+	VD: Controller injection service, service injection repository. Khi injection như thế thì trong dependency injection có 3 loại injection chính:
+	1 Contructoer injection
+		VD:
+		-----------------------------------------------------------------------------------
+		@Component
+		class A {
+			public void functionA() {
+				System.out.println("Hello Dung");
+			}
+		}
+		-----------------------------------------------------------------------------------
+		@Component
+		class B {
+			private final A a;
+			
+			@Autowired // Constructor Injection với @Autowired 
+			public B(A a) {
+				this.a = a;
+			}
+			
+			public void implementA() {
+				a.functionA();
+			}
+		}
+	2 Setter injection
+		VD:
+		-----------------------------------------------------------------------------------
+		@Component
+		class A {
+			public void functionA() {
+				System.out.println("Hello Dung");
+			}
+		}
+		-----------------------------------------------------------------------------------
+		@Component
+		class B {
+			private A a;
+			
+			@Autowired // Setter Injection với @Autowired
+			public void setA(A a) {
+				this.a = a;
+			}
+			
+			public void implementA() {
+				a.functionA();
+			}
+		}
+	3 Field injection
+		VD:
+		-----------------------------------------------------------------------------------
+		@Component
+		class A {
+			public void functionA() {
+				System.out.println("Hello Dung");
+			}
+		}
+		-----------------------------------------------------------------------------------
+		@Component
+		class B {
+			@Autowired
+			private A a;
+			
+			public void implementA() {
+				a.functionA();
+			}
+		}
+		Lưu ý: Field injection không khuyến khích dùng nguyên nhân biết đâu trong Bean đó không có giá trị hay giá trị bị null lúc đó sẽ sinh
+		1 số lỗi khác... VD Lỗi: NullPointerException là lỗi không có giá trị hay trị bị null ta thường gặp và khi đó chúng ta nên sử dụng 
+		Contructor injection vì Constructor được khởi tạo giá trị thì nó sẽ không bao giờ bị null. người ra khuyến khích sử dụng 
+		"private static final Bean" thêm 1 Constructor injection VD:
+			-----------------------------------------------------------------------------------
+			@Component
+			class A {
+				public void functionA() {
+					System.out.println("Hello Dung");
+				}
+			}
+			-----------------------------------------------------------------------------------
+			@Component
+			class B {
+				private static final A a;
+				
+				@Autowired // Constructor Injection với @Autowired 
+				public B(A a) {
+					this.a = a;
+				}
+				
+				public void implementA() {
+					a.functionA();
+				}
+			}
+			
+		
